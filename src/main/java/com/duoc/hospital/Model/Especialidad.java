@@ -25,4 +25,6 @@ public class Especialidad {
     @Column(nullable = false, length = 200)
     private String descripcion;
 
+    public Especialidad(String medicinaGeneral, String s) {
+    }
 }

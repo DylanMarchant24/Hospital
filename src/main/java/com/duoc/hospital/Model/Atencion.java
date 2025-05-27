@@ -45,4 +45,7 @@ public class Atencion {
     @ManyToOne
     @JoinColumn(name = "id_medico")
     private Medico medico;
+
+    public Atencion(LocalDate parse, LocalTime parse1, int i, String s, String nombre, Paciente paciente1, Medico medico1) {
+    }
 }

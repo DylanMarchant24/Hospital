@@ -25,4 +25,6 @@ public class Estado {
         private String descripcion;
 
 
+        public Estado(String pendiente, String pacienteAEsperaDeAtención) {
+        }
 }

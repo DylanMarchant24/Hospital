@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -44,4 +45,6 @@ public class Paciente {
     private List<Prevision> previsions;
 
 
+    public Paciente(String s, String maría, String sanchez, LocalDate parse, String mail, String number, String nombre) {
+    }
 }

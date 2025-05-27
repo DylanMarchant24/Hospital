@@ -25,4 +25,6 @@ public class Prevision {
     @Column(nullable = false  , length = 200)
     private int cobertura;
 
+    public Prevision(String fonasa, int i) {
+    }
 }

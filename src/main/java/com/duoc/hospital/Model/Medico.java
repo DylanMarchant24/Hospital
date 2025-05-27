@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -45,4 +46,6 @@ public class Medico {
     private String especialidad;
 
 
+    public Medico(String s, String julio, String perez, LocalDate parse, int i, String mail, String number, String nombre) {
+    }
 }
