@@ -72,4 +72,17 @@ public class PacienteController {
     public List<Paciente> obtenerPacientesMayoresDe(@PathVariable int edad) {
         return pacienteService.obtenerPacientesMayoresDe(edad);
     }
+
+    @GetMapping("/prevision")
+    public ResponseEntity<List<Paciente>> getPacientesPorPrevision(@RequestParam String prevision) {
+        List<Paciente> pacientes = pacienteService.findByPrevision(prevision);
+        return pacientes.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(pacientes);
+    }
+
+    @GetMapping("/especialidad")
+    public ResponseEntity<List<Paciente>> getPacientesPorEspecialidad(@RequestParam String especialidad) {
+        List<Paciente> pacientes = pacienteService.findPacientesPorEspecialidadMedico(especialidad);
+        return pacientes.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(pacientes);
+    }
+
 }

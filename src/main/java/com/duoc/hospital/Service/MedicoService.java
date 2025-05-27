@@ -57,4 +57,14 @@ public class MedicoService {
         LocalDate fechaLimite = LocalDate.now().minusYears(n);
         return medicoRepository.findByFechaContratacionBefore(fechaLimite);
     }
+
+    public Integer calcularSueldoTotal(int idMedico) {
+        Optional<Medico> medicoOpt = medicoRepository.findById(idMedico);
+        if (medicoOpt.isEmpty()) return 0;
+
+        Double comision = medicoRepository.findComisionPorAtenciones(idMedico);
+        int sueldoBase = medicoOpt.get().getSueldo_base();
+
+        return (int) (sueldoBase + (comision != null ? comision : 0));
+    }
 }

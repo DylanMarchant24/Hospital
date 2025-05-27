@@ -55,4 +55,12 @@ public class PacienteService {
     public List<Paciente> obtenerPacientesMayoresDe(int edad) {
         return pacienteRepository.findByEdadGreaterThan(edad);
     }
+
+    public List<Paciente> findByPrevision(String prevision) {
+        return pacienteRepository.findByPrevision(prevision);
+    }
+
+    public List<Paciente> findPacientesPorEspecialidadMedico(String especialidad) {
+        return pacienteRepository.findPacientesPorEspecialidadMedico(especialidad);
+    }
 }

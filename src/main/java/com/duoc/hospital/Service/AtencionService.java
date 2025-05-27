@@ -53,4 +53,22 @@ public class AtencionService  {
     public List<Atencion> buscarPorCostoMayorA(double costoMinimo) {
         return atencionRepository.findByCostoGreaterThan(costoMinimo);
     }
+    public List<Atencion> findByMedicoId(int id) {
+        return atencionRepository.findByMedicoId(id);
+    }
+    public List<Atencion> findByPacienteId(int id) {
+        return atencionRepository.findByPacienteId(id);
+    }
+    public Integer calcularTotalPorEstadoAlta() {
+        return atencionRepository.sumCostoByEstadoAlta();
+    }
+    public List<Atencion> findByEstado(String estado) {
+        return atencionRepository.findByEstado(estado);
+    }
+    public Integer calcularTotalNetoPaciente(int idPaciente) {
+        List<Atencion> atenciones = atencionRepository.findByPacienteId(idPaciente);
+        return atenciones.stream()
+                .mapToInt(a -> (int) (a.getCosto() * (1 - a.getCobertura() / 100.0))) // Aplica descuento por cobertura
+                .sum();
+    }
 }

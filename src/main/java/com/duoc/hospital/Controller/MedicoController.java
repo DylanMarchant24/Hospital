@@ -1,4 +1,5 @@
 package com.duoc.hospital.Controller;
+import com.duoc.hospital.Model.Atencion;
 import com.duoc.hospital.Model.Medico;
 import com.duoc.hospital.Model.Paciente;
 import com.duoc.hospital.Service.MedicoService;
@@ -6,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.duoc.hospital.Service.AtencionService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +17,10 @@ public class MedicoController {
 
     @Autowired
     private MedicoService medicoService;
+
+
+    @Autowired
+    private AtencionService atencionservice;
 
     @RequestMapping
     public ResponseEntity<List<Medico>> Listar() {
@@ -63,5 +69,16 @@ public class MedicoController {
     @GetMapping("/antiguedad/mayor")
     public List<Medico> obtenerMedicosConAntiguedadMayor(@RequestParam int anios) {
         return medicoService.obtenerMedicosConMasDeNAnios(anios);
+    }
+
+    @GetMapping("/atenciones/medico/{id}")
+    public ResponseEntity<List<Atencion>> getAtencionesPorMedico(@PathVariable int id) {
+        List<Atencion> atenciones = atencionservice.findByMedicoId(id);
+        return atenciones.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(atenciones);
+    }
+    @GetMapping("/{id}/sueldo-total")
+    public ResponseEntity<Integer> getSueldoTotalMedico(@PathVariable int id) {
+        Integer sueldoTotal = medicoService.calcularSueldoTotal(id);
+        return ResponseEntity.ok(sueldoTotal);
     }
 }

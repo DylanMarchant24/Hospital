@@ -24,6 +24,9 @@ public class Atencion {
     private LocalDate fecha_atencion;
 
     @Column(nullable = false)
+    private double cobertura; // Porcentaje cubierto por previsión
+
+    @Column(nullable = false)
     private LocalTime hora_inicio;
 
     @Column(columnDefinition = "integer default 0", length = 10)
