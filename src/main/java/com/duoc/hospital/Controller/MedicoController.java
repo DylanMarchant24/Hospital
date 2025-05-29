@@ -54,7 +54,7 @@ public class MedicoController {
 
     @GetMapping("/BUSCARRUN")
     public ResponseEntity<List<Medico>> finByRun(@RequestParam String run ) {
-        List<Medico> medicos = medicoService.finByRun(run);
+        List<Medico> medicos = medicoService.findByRun(run);
         if (medicos.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         };

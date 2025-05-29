@@ -44,18 +44,18 @@ public class MedicoService {
         return medicoRepository.findByNombreAndApellido(nombre, apellido);
     }
 
-    public List<Medico> finByRun(String run) {
-        return medicoRepository.finByRun(run);
+    public List<Medico> findByRun(String run) {
+        return medicoRepository.findByRun(run);
     }
 
     public List<Medico> obtenerMedicosConMenosDeNAnios(int n) {
         LocalDate fechaLimite = LocalDate.now().minusYears(n);
-        return medicoRepository.findByFechaContratacionAfter(fechaLimite);
+        return medicoRepository.findByFechaContratoAfter(fechaLimite);
     }
 
     public List<Medico> obtenerMedicosConMasDeNAnios(int n) {
         LocalDate fechaLimite = LocalDate.now().minusYears(n);
-        return medicoRepository.findByFechaContratacionBefore(fechaLimite);
+        return medicoRepository.findByFechaContratoBefore(fechaLimite);
     }
 
     public Integer calcularSueldoTotal(int idMedico) {

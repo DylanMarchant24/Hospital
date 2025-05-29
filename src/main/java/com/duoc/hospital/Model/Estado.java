@@ -25,6 +25,8 @@ public class Estado {
         private String descripcion;
 
 
-        public Estado(String pendiente, String pacienteAEsperaDeAtención) {
+        public Estado(String nombre, String descripcion) {
+                this.nombre = nombre;
+                this.descripcion = descripcion;
         }
 }

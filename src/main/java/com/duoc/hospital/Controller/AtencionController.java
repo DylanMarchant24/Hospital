@@ -80,7 +80,7 @@ public class AtencionController {
     }
     @GetMapping("/estado")
     public ResponseEntity<List<Atencion>> getAtencionesPorEstado(@RequestParam String estado) {
-        List<Atencion> atenciones = atencionService.findByEstado(estado);
+        List<Atencion> atenciones = atencionService.findAllByEstado(estado);
         return atenciones.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(atenciones);
     }
     @GetMapping("/paciente/{id}/costo-total")

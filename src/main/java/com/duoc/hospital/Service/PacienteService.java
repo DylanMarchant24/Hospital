@@ -40,12 +40,12 @@ public class PacienteService {
         return pacienteRepository.findByNombreAndApellido(nombre, apellido);
     }
 
-    public List<Paciente> finByPrevisionNombre(String nombre) {
-        return pacienteRepository.finByPrevisionNombre(nombre);
+    public List<Paciente> findByPrevisionNombre(String nombre) {
+        return pacienteRepository.findAllPacienteByPrevisionNombre(nombre);
     }
 
     public List<Paciente> finByRun(String run) {
-        return pacienteRepository.finByRun(run);
+        return pacienteRepository.findByRun(run);
     }
 
     public List<Paciente> obtenerPacientesMenoresDe(int edad) {
@@ -56,11 +56,5 @@ public class PacienteService {
         return pacienteRepository.findByEdadGreaterThan(edad);
     }
 
-    public List<Paciente> findByPrevision(String prevision) {
-        return pacienteRepository.findByPrevision(prevision);
-    }
 
-    public List<Paciente> findPacientesPorEspecialidadMedico(String especialidad) {
-        return pacienteRepository.findPacientesPorEspecialidadMedico(especialidad);
-    }
 }

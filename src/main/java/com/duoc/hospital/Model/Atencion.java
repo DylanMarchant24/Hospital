@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @Entity
 @Data
@@ -21,10 +20,7 @@ public class Atencion {
     private int id_atencion;
 
     @Column(nullable = false)
-    private LocalDate fecha_atencion;
-
-    @Column(nullable = false)
-    private double cobertura; // Porcentaje cubierto por previsión
+    private LocalDate fechaAtencion;
 
     @Column(nullable = false)
     private LocalTime hora_inicio;
@@ -35,8 +31,8 @@ public class Atencion {
     @Column(nullable = false, length = 300)
     private String comentario;
 
-    @Column(nullable = false, length = 20)
-    private String estado;
+    @Column(nullable = false)
+    private double cobertura; // Porcentaje cubierto por previsión
 
     @ManyToOne
     @JoinColumn(name = "id_paciente")
@@ -46,6 +42,17 @@ public class Atencion {
     @JoinColumn(name = "id_medico")
     private Medico medico;
 
-    public Atencion(LocalDate parse, LocalTime parse1, int i, String s, String nombre, Paciente paciente1, Medico medico1) {
+    @ManyToOne
+    @JoinColumn(name = "id_estado")
+    private Estado estado;
+
+    public Atencion(LocalDate fechaAtencion, LocalTime hora_inicio, int costo, String comentario, Estado estado, Paciente paciente, Medico medico) {
+        this.fechaAtencion = fechaAtencion;
+        this.hora_inicio = hora_inicio;
+        this.costo = costo;
+        this.comentario = comentario;
+        this.estado = estado;
+        this.paciente = paciente;
+        this.medico = medico;
     }
 }

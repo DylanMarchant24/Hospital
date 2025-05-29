@@ -12,19 +12,14 @@ public interface PacienteRepository extends JpaRepository<Paciente, Integer>{
 
     List<Paciente>findByNombreAndApellido(String nombre,String apellido);
 
-    List<Paciente>finByPrevisionNombre(String nombre);
+    List<Paciente>findAllPacienteByPrevisionNombre(String nombre);
 
-    List<Paciente>finByRun(String run);
+    List<Paciente>findByRun(String run);
 
     List<Paciente> findByEdadLessThan(int edad);
 
     List<Paciente> findByEdadGreaterThan(int edad);
 
-    List<Paciente> findByPrevision(String prevision);
 
-    @Query("SELECT p FROM Paciente p " +
-            "JOIN p.atenciones a " +
-            "JOIN a.medico m " +
-            "WHERE m.especialidad = :especialidad")
-    List<Paciente> findPacientesPorEspecialidadMedico(@Param("especialidad") String especialidad);
+
 }

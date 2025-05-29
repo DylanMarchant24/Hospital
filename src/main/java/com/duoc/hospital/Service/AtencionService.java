@@ -39,19 +39,19 @@ public class AtencionService  {
     }
 
     public List<Atencion> buscarPorFecha(LocalDate fecha) {
-        return atencionRepository.findByFechaAtencion(fecha);
+        return atencionRepository.findAllByFechaAtencion(fecha);
     }
 
     public List<Atencion> buscarEntreFechas(LocalDate inicio, LocalDate fin) {
-        return atencionRepository.findByFechaAtencionBetween(inicio, fin);
+        return atencionRepository.findAllByFechaAtencionBetween(inicio, fin);
     }
 
     public List<Atencion> buscarPorCostoMenorA(double costoMaximo) {
-        return atencionRepository.findByCostoLessThan(costoMaximo);
+        return atencionRepository.findAllByCostoLessThan(costoMaximo);
     }
 
     public List<Atencion> buscarPorCostoMayorA(double costoMinimo) {
-        return atencionRepository.findByCostoGreaterThan(costoMinimo);
+        return atencionRepository.findAllByCostoGreaterThan(costoMinimo);
     }
     public List<Atencion> findByMedicoId(int id) {
         return atencionRepository.findByMedicoId(id);
@@ -60,10 +60,10 @@ public class AtencionService  {
         return atencionRepository.findByPacienteId(id);
     }
     public Integer calcularTotalPorEstadoAlta() {
-        return atencionRepository.sumCostoByEstadoAlta();
+        return atencionRepository.sumCostoPorEstado("ALTA");
     }
-    public List<Atencion> findByEstado(String estado) {
-        return atencionRepository.findByEstado(estado);
+    public List<Atencion> findAllByEstado(String nombreEstado) {
+        return atencionRepository.findByEstadoNombre(nombreEstado);
     }
     public Integer calcularTotalNetoPaciente(int idPaciente) {
         List<Atencion> atenciones = atencionRepository.findByPacienteId(idPaciente);

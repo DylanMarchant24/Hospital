@@ -9,15 +9,20 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface AtencionRepository extends JpaRepository<Atencion, Integer> {
-    List<Atencion> findByFechaAtencion(LocalDate fechaAtencion);
-    List<Atencion> findByFechaAtencionBetween(LocalDate fechaInicio, LocalDate fechaFin);
-    List<Atencion> findByCostoLessThan(double costoMaximo);
-    List<Atencion> findByCostoGreaterThan(double costoMinimo);
+    List<Atencion> findAllByFechaAtencion(LocalDate fechaAtencion);
+    List<Atencion> findAllByFechaAtencionBetween(LocalDate fechaInicio, LocalDate fechaFin);
+    List<Atencion> findAllByCostoLessThan(double costoMaximo);
+    List<Atencion> findAllByCostoGreaterThan(double costoMinimo);
     @Query("SELECT a FROM Atencion a WHERE a.medico.id_medico = :id")
     List<Atencion> findByMedicoId(@Param("id") int id);
     @Query("SELECT a FROM Atencion a WHERE a.paciente.id_paciente = :id")
     List<Atencion> findByPacienteId(@Param("id") int id);
-    @Query("SELECT SUM(a.costo) FROM Atencion a WHERE a.estado = 'Alta'")
+
+    @Query("SELECT SUM(a.costo) FROM Atencion a WHERE a.estado.nombre = 'ALTA'")
     Integer sumCostoByEstadoAlta();
-    List<Atencion> findByEstado(String estado);
+    @Query("SELECT SUM(a.costo) FROM Atencion a WHERE a.estado.nombre = :estado")
+    Integer sumCostoPorEstado(@Param("estado") String estado);
+
+    // Método generado automáticamente por Spring Data JPA
+    List<Atencion> findByEstadoNombre(String nombreEstado);
 }

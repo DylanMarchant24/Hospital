@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Prevision {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_prevision;
@@ -22,9 +21,16 @@ public class Prevision {
     @Column(nullable = false, length = 50)
     private String nombre;
 
-    @Column(nullable = false  , length = 200)
+    @Column(nullable = false)
     private int cobertura;
 
-    public Prevision(String fonasa, int i) {
+    public Prevision(String nombre, int cobertura) {
+        this.nombre = nombre;
+        this.cobertura = cobertura;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "id-paciente")
+    private Paciente paciente;
+
 }

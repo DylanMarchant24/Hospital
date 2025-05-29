@@ -1,5 +1,7 @@
 package com.duoc.hospital.Model;
 
+
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,14 +9,13 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
+import java.time.Period;
 
 @Entity
 @Table(name = "paciente")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,21 +31,31 @@ public class Paciente {
     private String apellido;
 
     @Column(nullable = false)
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
-    @Column(nullable = false,length = 100)
+    @Column(nullable = false, length = 100)
     private String correo;
 
     @Column(nullable = false, length = 20)
     private String telefono;
 
-    @Column(nullable = false, length = 20)
-    private String prevision;
+    @Column(nullable = false)
+    private int edad;
 
-    @OneToMany(mappedBy = "paciente")
-    private List<Prevision> previsions;
+    @ManyToOne
+    @JoinColumn(name = "id_prevision")
+    private Prevision prevision;
 
-
-    public Paciente(String s, String maría, String sanchez, LocalDate parse, String mail, String number, String nombre) {
+    public Paciente(String run, String nombre, String apellido,
+                    LocalDate fechaNacimiento, String correo,
+                    String telefono, Prevision prevision) {
+        this.run = run;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.prevision = prevision;
+        this.edad = Period.between(fechaNacimiento, LocalDate.now()).getYears();
     }
 }

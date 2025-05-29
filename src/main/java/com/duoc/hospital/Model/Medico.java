@@ -18,10 +18,9 @@ import java.util.List;
 public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id_medico;
 
-    @Column(nullable = true, length = 12)
+    @Column(length = 12)
     private String run;
 
     @Column(nullable = false, length = 50)
@@ -31,7 +30,7 @@ public class Medico {
     private String apellido;
 
     @Column(nullable = false)
-    private Date fecha_contrato;
+    private LocalDate fechaContrato;
 
     @Column(nullable = false, length = 10)
     private int sueldo_base;
@@ -42,10 +41,20 @@ public class Medico {
     @Column(nullable = false, length = 20)
     private String telefono;
 
-    @Column(nullable = false, length = 20)
-    private String especialidad;
+    @ManyToOne
+    @JoinColumn(name = "id_especialidad")
+    private Especialidad especialidad;
 
 
-    public Medico(String s, String julio, String perez, LocalDate parse, int i, String mail, String number, String nombre) {
+
+    public Medico(String run, String nombre, String apellido, LocalDate fechaContrato, int sueldoBase, String correo, String telefono, Especialidad especialidad) {
+        this.run = run;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaContrato = fechaContrato;
+        this.sueldo_base = sueldoBase;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.especialidad = especialidad;
     }
 }
